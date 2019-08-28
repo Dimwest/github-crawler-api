@@ -13,18 +13,10 @@ venv/bin/activate: requirements.txt
 check: unit_test lint
 
 lint: venv
-	venv/bin/flake8 app.py tests chalicelib fargate
-
-it_test: venv
-	venv/bin/py.test -vvvv -r sxX tests/integration
-
-e2e_test: venv
-	venv/bin/py.test -vvvv -r sxX tests/e2e
+	venv/bin/flake8 app.py tests chalicelib
 
 unit_test: venv
 	venv/bin/py.test -vvvv -r sxX tests/unit
-
-test: venv unit_test it_test e2e_test
 
 chalice-deploy:
 	chalice deploy --stage $(STAGE)
