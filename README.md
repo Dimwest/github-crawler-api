@@ -23,11 +23,11 @@ non-free-tier EC2 instance
 		
 #### Cons: 
 
-- Not integrated in an Infrastructure as Code (e.g. Terraform) as such, which can be problematic
+- Not integrated in an Infrastructure as Code tool (e.g. Terraform, Cloudformation), which can be problematic
 when working in an environment which is 100% managed via IaC as both local and CI user must have 
 IAM permissions to deploy the Lambdas
 - Lambdas timeout after 15 minutes, which can be problematic for very large workloads such as 
-fetching all of Facebook's repositories'. However API Gateway times out after 29 seconds hence Lambdas
+fetching all of Facebook's repositories'. However API Gateway times out much faster hence Lambdas
 will not be the bottleneck in the context of an API development
 
 ## How to
@@ -35,21 +35,18 @@ will not be the bottleneck in the context of an API development
 ### Local deployment for testing
 
 Note: this project currently only works on Python 3.6 and older due to an open issue on the PyGithub 
-library: https://github.com/PyGithub/PyGithub/issues/856
+library: https://github.com/PyGithub/PyGithub/issues/856. Using the Python3.6 Docker image prevents
+us from running into such compatibility issues.
 
-Here are the steps to follow in order to deploy the API locally and assess the code:
+Here are the commands to run in order to deploy the API in a local Docker container:
 
-1) Run `make venv` (as mentioned previously, you may need to unlink your Python install and temporarily install 3.6 if 
-your current Python installation is 3.7)
+1) Run `docker build -t github-api-crawler --build-arg TOKEN=your_github_api_token .`
 
-2) Run `source venv bin activate`
+2) Run `docker run -d --name github-api-container github-api-crawler`
 
-3) Run `export GITHUB_API_TOKEN=your_github_api_token`
+3) Enter the container shell using `docker exec -it github-api-container /bin/bash`
 
-4) Run `chalice local`
-
-5) Try accessing the endpoint at `http://127.0.0.1:8000/monthly_new_contributors/username` for a Github user, 
-e.g. for [Dimwest](http://127.0.0.1:8000/monthly_new_contributors/Dimwest)
+4) Test an API query for a specific user using `curl http://127.0.0.1:8000/monthly_new_contributors/Dimwest`
 
 ### Remote deployment on AWS
 
@@ -60,4 +57,3 @@ there parameters are filled with dummy data).
 Your Github API token also needs to be whether directly added in the AWS console as an environment 
 variable available to the Lambda function or as a secret in AWS Secrets Manager with the following format:
 `{"github_api_token": "your_github_api_token"}`
-

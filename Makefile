@@ -10,7 +10,7 @@ venv/bin/activate: requirements.txt
 	$(PWD)/venv/bin/pip install -Ur requirements.txt
 	touch venv/bin/activate
 
-check: unit_test lint
+test: unit_test lint
 
 lint: venv
 	venv/bin/flake8 app.py tests chalicelib
