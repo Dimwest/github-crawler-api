@@ -1,0 +1,24 @@
+# Chalice related
+.chalice/deployments/
+.chalice/deployed/
+.chalice/venv/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache
+.python-version
+.mypy_cache
+
+# Virtual env
+venv/
+
+# Test cache
+.cache/
+.pytest_cache/
+
+# OS / IDE generated files
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,76 @@
+{
+  "version": "2.0",
+  "app_name": "github-crawler",
+  "environment_variables": {
+    "APPNAME": "github-crawler",
+    "AWSREGION": "eu-west-1"
+  },
+  "stages": {
+    "dev": {
+      "autogen_policy": false,
+      "iam_policy_file": "policy-dev.json",
+      "subnet_ids": [
+        "subnet-12345678",
+        "subnet-23456789",
+        "subnet-34567890"
+      ],
+      "security_group_ids": [
+        "sg-12345678"
+      ],
+      "environment_variables": {
+        "MAX_WORKERS": "5",
+        "GITHUB_SECRETNAME": "lambda/github/token/dev"
+      },
+      "lambda_functions": {
+        "monthly_new_contributors": {
+          "lambda_timeout": 900,
+          "lambda_memory_size": 1024
+        }
+      }
+    },
+    "staging": {
+      "autogen_policy": false,
+      "iam_policy_file": "policy-staging.json",
+      "subnet_ids": [
+        "subnet-12345678",
+        "subnet-23456789",
+        "subnet-34567890"
+      ],
+      "security_group_ids": [
+        "sg-12345678"
+      ],
+      "environment_variables": {
+        "MAX_WORKERS": "5",
+        "GITHUB_SECRETNAME": "lambda/github/token/staging"
+      },
+      "lambda_functions": {
+        "monthly_new_contributors": {
+          "lambda_timeout": 900,
+          "lambda_memory_size": 1024
+        }
+      }
+    },
+    "production": {
+      "autogen_policy": false,
+      "iam_policy_file": "policy-production.json",
+      "subnet_ids": [
+        "subnet-12345678",
+        "subnet-23456789",
+        "subnet-34567890"
+      ],
+      "security_group_ids": [
+        "sg-12345678"
+      ],
+      "environment_variables": {
+        "MAX_WORKERS": "5",
+        "GITHUB_SECRETNAME": "lambda/github/token/production"
+      },
+      "lambda_functions": {
+        "monthly_new_contributors": {
+          "lambda_timeout": 900,
+          "lambda_memory_size": 1024
+        }
+      }
+    }
+  }
+}
