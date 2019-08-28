@@ -18,7 +18,7 @@
         "sg-12345678"
       ],
       "environment_variables": {
-        "MAX_WORKERS": 5,
+        "MAX_WORKERS": "5",
         "GITHUB_SECRETNAME": "lambda/github/token/dev"
       },
       "lambda_functions": {
@@ -40,7 +40,7 @@
         "sg-12345678"
       ],
       "environment_variables": {
-        "MAX_WORKERS": 5,
+        "MAX_WORKERS": "5",
         "GITHUB_SECRETNAME": "lambda/github/token/staging"
       },
       "lambda_functions": {
@@ -62,7 +62,7 @@
         "sg-12345678"
       ],
       "environment_variables": {
-        "MAX_WORKERS": 5,
+        "MAX_WORKERS": "5",
         "GITHUB_SECRETNAME": "lambda/github/token/production"
       },
       "lambda_functions": {
