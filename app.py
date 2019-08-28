@@ -1,6 +1,7 @@
 from chalice import Chalice, Response
 from chalicelib.crawler import get_monthly_new_contributors
-from github import GithubException, RateLimitExceededException, BadCredentialsException
+from github import GithubException, \
+    RateLimitExceededException, BadCredentialsException
 
 app = Chalice(app_name="github-crawler")
 

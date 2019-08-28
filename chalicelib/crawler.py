@@ -58,7 +58,8 @@ def get_github_user(username: str) -> NamedUser:
 
     token = (
         os.environ.get("GITHUB_API_TOKEN")
-        or retrieve_secret(os.environ.get("GITHUB_SECRETNAME"))["github_api_token"]
+        or retrieve_secret(
+            os.environ.get("GITHUB_SECRETNAME"))["github_api_token"]
     )
     if not token:
         logger.warning(
