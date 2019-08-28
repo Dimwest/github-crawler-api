@@ -37,9 +37,8 @@ def get_repo_commits(repo: Repository.Repository) -> List[Dict[str, Any]]:
 
         if e.args[0] == 409 \
                 and e.args[1]["message"] == "Git Repository is empty.":
-            logger.warning(
-                f"Repository {repo.name} is empty, returning empty list"
-            )
+            logger.warning(f"Repository {repo.name} is empty, "
+                           f"returning empty list")
             return []
 
         else:
@@ -57,9 +56,10 @@ def get_github_user(username: str) -> NamedUser:
     :return: Github NamedUser object
     """
 
-    token = os.environ.get("GITHUB_API_TOKEN") or retrieve_secret(
-        os.environ.get("GITHUB_SECRETNAME")
-    )['github_api_token']
+    token = (
+        os.environ.get("GITHUB_API_TOKEN")
+        or retrieve_secret(os.environ.get("GITHUB_SECRETNAME"))["github_api_token"]
+    )
     if not token:
         logger.warning(
             f"Environment variable GITHUB_API_TOKEN is not set, "

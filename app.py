@@ -1,7 +1,6 @@
 from chalice import Chalice, Response
 from chalicelib.crawler import get_monthly_new_contributors
-from github import GithubException, \
-    RateLimitExceededException, BadCredentialsException
+from github import GithubException, RateLimitExceededException, BadCredentialsException
 
 app = Chalice(app_name="github-crawler")
 
@@ -16,7 +15,7 @@ def monthly_new_contributors_per_user(username: str):
             body={
                 "data": data,
                 "message": f"Successfully retrieved new contributors "
-                           f"statistics for user {username}",
+                f"statistics for user {username}",
             },
         )
 
@@ -26,7 +25,7 @@ def monthly_new_contributors_per_user(username: str):
             body={
                 "data": {},
                 "message": f"Rate Limit Exceeded Error: Github API "
-                           f"hourly limit has been exceeded",
+                f"hourly limit has been exceeded",
             },
         )
     except BadCredentialsException:
@@ -35,7 +34,7 @@ def monthly_new_contributors_per_user(username: str):
             body={
                 "data": {},
                 "message": f"Bad Credentials Error: Invalid Github "
-                           f"authentication token",
+                f"authentication token",
             },
         )
     except GithubException:
@@ -44,11 +43,12 @@ def monthly_new_contributors_per_user(username: str):
             body={
                 "data": {},
                 "message": f"Github API Error: could not retrieve "
-                           f"data for user {username}",
+                f"data for user {username}",
             },
         )
     except Exception:
         return Response(
-            status_code=500, body={"data": {},
-                                   "message": f"Internal Server Error"}
+            status_code=500, body={
+                "data": {}, "message": f"Internal Server Error"
+            }
         )
